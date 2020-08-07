@@ -1,5 +1,5 @@
 defmodule Cadet.Achievments.AchievementProgressTest do
-  alias Cadet.Achievements.AchievementProgress
+  alias Cadet.Incentives.AchievementProgress
 
   use Cadet.ChangesetCase, entity: AchievementProgress
 

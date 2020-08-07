@@ -46,10 +46,7 @@ defmodule CadetWeb.Router do
 
     resources("/sourcecast", SourcecastController, only: [:create, :delete])
 
-    get("/achievements", AchievementsController, :index)
-    post("/achievements/:id", AchievementsController, :update)
-    delete("/achievements/:id", AchievementsController, :delete)
-    delete("/achievements/:id/goals/:order", AchievementsController, :delete_goal)
+    get("/achievements", AchievementsGoalsController, :index_achievements)
 
     get("/assessments", AssessmentsController, :index)
     post("/assessments", AssessmentsController, :create)
@@ -92,10 +89,26 @@ defmodule CadetWeb.Router do
     post("/chapter/update/:id", ChaptersController, :update)
   end
 
+  # Authenticated Pages
+  scope "/v1/self", CadetWeb do
+    pipe_through([:api, :auth, :ensure_auth])
+
+    get("/goals", AchievementsGoalsController, :index_goals)
+  end
+
   scope "/v1/admin", CadetWeb do
     pipe_through([:api, :auth, :ensure_auth, :ensure_staff])
 
     get("/users", AdminUserController, :index)
+
+    put("/achievements", AdminAchievementsController, :bulk_update)
+    put("/achievements/:uuid", AdminAchievementsController, :update)
+    delete("/achievements/:uuid", AdminAchievementsController, :delete)
+
+    get("/goals", AdminGoalsController, :index)
+    put("/goals", AdminGoalsController, :bulk_update)
+    put("/goals/:uuid", AdminGoalsController, :update)
+    delete("/goals/:uuid", AdminGoalsController, :delete)
   end
 
   # Other scopes may use custom stacks.

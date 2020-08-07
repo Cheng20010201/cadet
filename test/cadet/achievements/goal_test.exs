@@ -1,7 +1,7 @@
-defmodule Cadet.Achievments.AchievementGoalTest do
-  alias Cadet.Achievements.AchievementGoal
+defmodule Cadet.Achievments.GoalTest do
+  alias Cadet.Incentives.Goal
 
-  use Cadet.ChangesetCase, entity: AchievementGoal
+  use Cadet.ChangesetCase, entity: Goal
 
   describe "Changesets" do
     test "valid params" do

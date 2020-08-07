@@ -1,13 +1,13 @@
-defmodule Cadet.AchievementsTest do
+defmodule Cadet.IncentivesTest do
   use Cadet.DataCase
 
   alias Cadet.Accounts.User
 
-  alias Cadet.Achievements
+  alias Cadet.Incentives
 
-  alias Cadet.Achievements.{
+  alias Cadet.Incentives.{
     Achievement,
-    AchievementGoal,
+    Goal,
     AchievementProgress
   }
 
@@ -57,8 +57,7 @@ defmodule Cadet.AchievementsTest do
 
     assert %{title: ^achievement_title, ability: ^achievement_ability} = Repo.one(Achievement)
 
-    assert %{order: ^goal_order, target: ^goal_target, text: ^goal_text} =
-             Repo.one(AchievementGoal)
+    assert %{order: ^goal_order, target: ^goal_target, text: ^goal_text} = Repo.one(Goal)
   end
 
   test "create achievement with goal without order" do
@@ -318,7 +317,7 @@ defmodule Cadet.AchievementsTest do
                }
              )
 
-    assert %{text: ^new_text} = Repo.one(AchievementGoal)
+    assert %{text: ^new_text} = Repo.one(Goal)
 
     new_text_2 = "Another goal"
 
@@ -337,8 +336,7 @@ defmodule Cadet.AchievementsTest do
                }
              )
 
-    assert [%{text: ^new_text}, %{text: ^new_text_2}] =
-             AchievementGoal |> order_by(:order) |> Repo.all()
+    assert [%{text: ^new_text}, %{text: ^new_text_2}] = Goal |> order_by(:order) |> Repo.all()
   end
 
   test "update goal with missing order" do
@@ -394,6 +392,6 @@ defmodule Cadet.AchievementsTest do
       })
 
     Achievements.delete_goal(user, achievement.id, goal.order)
-    assert AchievementGoal |> Repo.get(goal.id) |> is_nil()
+    assert Goal |> Repo.get(goal.id) |> is_nil()
   end
 end

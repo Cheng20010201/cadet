@@ -1,5 +1,5 @@
 defmodule Cadet.Achievments.AchievementPrerequisiteTest do
-  alias Cadet.Achievements.AchievementPrerequisite
+  alias Cadet.Incentives.AchievementPrerequisite
 
   use Cadet.ChangesetCase, entity: AchievementPrerequisite
 

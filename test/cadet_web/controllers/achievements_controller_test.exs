@@ -5,7 +5,7 @@ defmodule CadetWeb.AchievementsControllerTest do
 
   alias Cadet.Repo
   alias CadetWeb.AchievementsController
-  alias Cadet.Achievements.{Achievement, AchievementGoal, AchievementProgress}
+  alias Cadet.Incentives.{Achievement, Goal, AchievementProgress}
   alias Ecto.Query
 
   require Query
@@ -95,7 +95,7 @@ defmodule CadetWeb.AchievementsControllerTest do
     @tag authenticate: :staff
     test "succeeds for staff", %{conn: conn, achievement: achievement, goal: goal} do
       assert conn |> delete(build_delete_goal_url(achievement.id, goal.order)) |> response(204)
-      assert is_nil(Repo.get(AchievementGoal, goal.id))
+      assert is_nil(Repo.get(Goal, goal.id))
     end
 
     @tag authenticate: :student

@@ -1,11 +1,11 @@
-defmodule Cadet.Achievements.AchievementFactory do
+defmodule Cadet.Incentives.AchievementFactory do
   @moduledoc """
   Factory for the Achievement entity
   """
 
   defmacro __using__(_opts) do
     quote do
-      alias Cadet.Achievements.Achievement
+      alias Cadet.Incentives.Achievement
 
       def achievement_factory do
         %Achievement{
